@@ -14,7 +14,7 @@ public class MyArrayList<E> {
     }
 
     public void addAt(E num, int pos) throws InvalidPositionException, ArrayFullException {
-        if (pos < 1 || pos -1 > _size) throw new InvalidPositionException("Position must be between 1 and " + capacity);
+        if (pos < 1 || pos -1 > _size) throw new InvalidPositionException("Position must be between 1 and " + _size);
 
         if (_size >= capacity) throw new ArrayFullException("The array is full and " + num + " cannot be inserted.");
 
@@ -80,4 +80,4 @@ public class MyArrayList<E> {
         return val;
     }
 
-}
+};

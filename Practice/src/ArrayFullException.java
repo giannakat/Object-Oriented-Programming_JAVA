@@ -1,4 +1,4 @@
-public class ArrayFullException extends RuntimeException {
+public class ArrayFullException extends Exception {
     public ArrayFullException(String message) {
         super(message);
     }
