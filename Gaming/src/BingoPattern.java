@@ -1,28 +1,29 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BingoPattern implements Runnable {
+abstract class BingoPattern implements Runnable {
+    protected final BingoGame game;
     protected final BingoCard card;
-    protected final List<BingoChecker> checkers = new ArrayList<>();
+    protected final List<Thread> checkers = new ArrayList<>();
 
-    public BingoPattern(BingoCard card) {
+    public BingoPattern(BingoGame game, BingoCard card) {
+        this.game = game;
         this.card = card;
     }
 
-    @Override
     public void run() {
-        List<Thread> threads = new ArrayList<>();
-        for (BingoChecker checker : checkers) {
-            Thread t = new Thread(checker);
-            threads.add(t);
-            t.start();
+        for (Thread checker : checkers) {
+            checker.start();
         }
-        for (Thread t : threads) {
-            try { t.join(); } catch (InterruptedException e) { return; }
+        for (Thread checker : checkers) {
+            try {
+                checker.join();
+            } catch (InterruptedException e) {
+                System.out.println("Card " + card.getId() + " loses");
+                return;
+            }
         }
-        System.out.println("Card " + card.getId() + " completes pattern!");
     }
-
 }
 
 

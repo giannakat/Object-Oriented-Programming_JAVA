@@ -1,50 +1,42 @@
 import java.util.*;
 
-public class BingoGame implements Runnable{
-    Scanner scanner = new Scanner(System.in);
-    private final boolean[] result = new boolean[76];
-    private boolean bingo = false;
+class BingoGame implements Runnable {
+    private final boolean[] results = new boolean[76];
     private final List<BingoCard> cards = new ArrayList<>();
+    private volatile boolean bingo = false;
 
-    public BingoGame(){
-        result[0] = true;
-        for()
+    public BingoGame(int numPlayers) {
+        results[0] = true;
+        for (int i = 1; i <= numPlayers; i++) {
+            cards.add(new BingoCard(i));
+        }
     }
 
-    @Override
     public void run() {
-        Random random = new Random();
-        Set<Integer> chosenNumbers = new TreeSet<>();
-
-        System.out.println("How many players: ");
-        int totalCard = scanner.nextInt();
-        for(int i = 0; i < totalCard; i++){
-            cards.add(new BingoCard(i+1));
-        }
-
-        for(BingoCard card : cards){
-            Thread t = new Thread(new BingoPatternPlus(card));
-            patternThreads.add(t);
-            t.start();
-        }
-
+        Set<Integer> drawnNumbers = new TreeSet<>();
+        Random rand = new Random();
         while (!bingo) {
             int num;
-            do { num = random.nextInt(75) + 1; } while (result[num]);
-            result[num] = true;
-            chosenNumbers.add(num);
-
-            System.out.println("Number Drawn: " + num);
-            System.out.println("Numbers so far: " + chosenNumbers);
-
-            synchronized (this) {
-                notifyAll(); // Notify checkers waiting for updates
+            do {
+                num = rand.nextInt(75) + 1;
+            } while (results[num]);
+            results[num] = true;
+            drawnNumbers.add(num);
+            System.out.println("Number drawn: " + num);
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                break;
             }
-
-            try { Thread.sleep(300); } catch (InterruptedException e) { break; }
         }
+    }
 
-        }
+    public boolean[] getResults() {
+        return results;
+    }
 
+    public void declareBingo(BingoCard card) {
+        bingo = true;
+        System.out.println("Card " + card.getId() + " completes pattern!");
     }
 }

@@ -1,7 +1,7 @@
-public class BingoPatternPlus extends BingoPattern {
-    public BingoPatternPlus(BingoCard card) {
-        super(card);
-        checkers.add(new BingoRowChecker(card, 2));
-        checkers.add(new BingoColumnChecker(card, 2));
+class BingoPatternPlus extends BingoPattern {
+    public BingoPatternPlus(BingoGame game, BingoCard card) {
+        super(game, card);
+        checkers.add(new Thread(new BingoRowChecker(game, card, 2)));
+        checkers.add(new Thread(new BingoColumnChecker(game, card, 2)));
     }
 }

@@ -1,11 +1,25 @@
-public class BingoColumnChecker extends BingoChecker {
+
+class BingoColumnChecker extends BingoChecker {
     private final int col;
-    public BingoColumnChecker(BingoCard card, int col) {
-        super(card);
+
+    public BingoColumnChecker(BingoGame game, BingoCard card, int col) {
+        super(game, card);
         this.col = col;
     }
-    @Override
+
     public void run() {
-        System.out.println("Checking column " + col + " for Card " + card.getId());
+        int[][] cardNumbers = card.getCard();
+        for (int i = 0; i < 5; i++) {
+            int num = cardNumbers[i][col];
+            while (!game.getResults()[num]) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    System.out.println("Card " + card.getId() + " loses while waiting for " + num);
+                    return;
+                }
+            }
+        }
+        game.declareBingo(card);
     }
 }

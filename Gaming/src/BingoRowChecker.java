@@ -1,11 +1,23 @@
-public class BingoRowChecker extends BingoChecker{
+class BingoRowChecker extends BingoChecker {
     private final int row;
-    public BingoRowChecker(BingoCard card, int row) {
-        super(card);
+
+    public BingoRowChecker(BingoGame game, BingoCard card, int row) {
+        super(game, card);
         this.row = row;
     }
-    @Override
+
     public void run() {
-        System.out.println("Checking row " + row + " for Card " + card.getId());
+        int[][] cardNumbers = card.getCard();
+        for (int num : cardNumbers[row]) {
+            while (!game.getResults()[num]) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    System.out.println("Card " + card.getId() + " loses while waiting for " + num);
+                    return;
+                }
+            }
+        }
+        game.declareBingo(card);
     }
 }

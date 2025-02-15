@@ -1,55 +1,48 @@
 import java.util.*;
-import java.util.List;
-import java.util.Random;
+import java.util.concurrent.*;
 
-public class BingoCard {
+class BingoCard {
+    private final int[][] card;
     private final int id;
-    private final int[][] card = new int[5][5];
-    private static final Random random = new Random();
 
-    public BingoCard(int id){
+    public BingoCard(int id) {
         this.id = id;
+        this.card = new int[5][5];
         generateCard();
     }
 
     private void generateCard() {
-        int start = 1;
-        for(int col = 0; col < 5; col++){
+        Random rand = new Random();
+        for (int col = 0; col < 5; col++) {
             List<Integer> numbers = new ArrayList<>();
-            for(int i = start; i < start+ 15; i++){
+            for (int i = 1 + (col * 15); i <= 15 + (col * 15); i++) {
                 numbers.add(i);
             }
-
             Collections.shuffle(numbers);
-            for(int row = 0; row < 5; row++){
-                if(col == 2 && row == 2){
-                    card[row][col] = 0;
-                } else {
-                    card[row][col] = numbers.remove(0);
-                }
+            for (int row = 0; row < 5; row++) {
+                card[row][col] = (col == 2 && row == 2) ? 0 : numbers.get(row);
             }
-            start+=15;
         }
     }
 
-    public int getId(){
-        return id;
-    }
-
-    public int[][] getCard(){
+    public int[][] getCard() {
         return card;
     }
 
-    public String toString(){
-        StringBuilder sb = new StringBuilder("Card" + id + "\n");
+    public int getId() {
+        return id;
+    }
 
-        for(int[] row:card){
-            for(int num:row){
-                sb.append(String.format("%2d", num));
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Card ").append(id).append("\n");
+        sb.append(" B   I   N   G   O \n");
+        for (int[] row : card) {
+            for (int num : row) {
+                sb.append(String.format("%2s  ", num == 0 ? "F" : num)).append(" ");
             }
             sb.append("\n");
         }
-
         return sb.toString();
     }
 }
