@@ -1,0 +1,39 @@
+/* styles.css */
+
+/* Set a background color for the whole app */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Style for buttons */
+.button {
+    -fx-background-color: #3498db;  /* Blue */
+    -fx-text-fill: white;  /* White text */
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+    -fx-border-radius: 5px;
+}
+
+/* Hover effect */
+.button:hover {
+    -fx-background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Click effect */
+.button:pressed {
+    -fx-background-color: #1f6690;
+}
+
+/* Style for text fields */
+.text-field {
+    -fx-background-color: #ffffff;  /* White background */
+    -fx-border-color: #3498db;  /* Blue border */
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Focused effect */
+.text-field:focused {
+    -fx-border-color: #2980b9; /* Darker blue when focused */
+}
