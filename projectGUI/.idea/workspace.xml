@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85d086f5-b7dd-43d6-bd87-ce3df733662a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../threadGUI/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threadGUI/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threadGUI/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threadGUI/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="vb_panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.perfectnumber.HelloController">
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter number of threads:" />
+      <TextField fx:id="tf_thread_count" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a number:" />
+      <TextField fx:id="tf_number" />
+      <Button fx:id="btn_find" mnemonicParsing="false" onAction="#findPerfectNumber" prefHeight="26.0" prefWidth="400.0" text="FIND">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Results: " />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <TextArea fx:id="ta_result" editable="false" prefHeight="100.0" prefWidth="603.0" />
+         </children>
+      </HBox>
+      <HBox fx:id="hb_progress" prefHeight="100.0" prefWidth="200.0" />
+   </children>
+</VBox>
