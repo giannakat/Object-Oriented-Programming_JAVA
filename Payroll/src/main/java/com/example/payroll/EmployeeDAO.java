@@ -32,7 +32,13 @@ public class EmployeeDAO {
             pstmt.setDouble(1, employee.hours);
             pstmt.setDouble(2, employee.wage);
             pstmt.setString(3, employee.name);
-            pstmt.executeUpdate();
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Employee updated successfully!");
+            } else {
+                System.out.println("⚠️ No rows updated. Check ID!");
+            }
             System.out.println("Employee updated!");
 
         } catch (SQLException e) {
