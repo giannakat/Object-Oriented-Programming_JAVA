@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.payroll.LoginController">
+   <children>
+      <Text boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" textOrigin="CENTER">
+         <font>
+            <Font name="Book Antiqua Bold" size="48.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="130.0" top="40.0" />
+         </VBox.margin>
+      </Text>
+      <ComboBox fx:id="role_cb" prefHeight="26.0" prefWidth="110.0" promptText="Select Role">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+      </ComboBox>
+      <Label text="ID Number">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="idnumber_tf" promptText="Enter id number">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+         </VBox.margin>
+      </TextField>
+      <Label text="Username">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="username_tf" promptText="Enter username">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+         </VBox.margin>
+      </TextField>
+      <Label fx:id="password_prompt" text="Password">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Label>
+      <PasswordField fx:id="password_tf" promptText="Enter password">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+         </VBox.margin>
+      </PasswordField>
+      <Button fx:id="login_button" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="506.0" text="LOGIN">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+</VBox>

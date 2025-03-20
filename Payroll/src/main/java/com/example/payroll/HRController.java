@@ -1,17 +1,13 @@
 package com.example.payroll;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
-public class HelloController {
+public class HRController {
 
 
     public TextField tf_hourlywage;
@@ -26,7 +22,7 @@ public class HelloController {
 
     public void initialize(){
         // Load employees from the database when UI starts
-        lv_list.setItems(EmployeeDAO.loadEmployees());
+        lv_list.setItems(EmployeeCRUD.loadEmployees());
 
         lv_list.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -54,16 +50,16 @@ public class HelloController {
         String name = tf_employeename.getText();
         if(current == null){
             Employee e = new Employee(name, hours, wage);
-            EmployeeDAO.insertEmployee(e);
+            EmployeeCRUD.insertEmployee(e);
             lv_list.getItems().add(e);
         }else{
             current.name = name;
             current.wage = wage;
             current.hours = hours;
-            EmployeeDAO.updateEmployee(current);
+            EmployeeCRUD.updateEmployee(current);
             lv_list.refresh();
         }
-
+        lv_list.getSelectionModel().clearSelection();
         salary_view.setText("Saved to database");
     }
 
@@ -74,5 +70,37 @@ public class HelloController {
         tf_employeename.clear();
         lv_list.getSelectionModel().clearSelection();
         current = null;
+    }
+
+    public void onDeleteClicked(ActionEvent actionEvent){
+       if(!showDeleteConfirmation()){
+           System.out.println("Deletion canceled");
+           return;
+       }
+
+        Employee selectedEmployee = lv_list.getSelectionModel().getSelectedItem();
+
+        if (selectedEmployee != null) {
+            // Remove from database
+            EmployeeCRUD.deleteEmployee(selectedEmployee.id);
+
+            // Remove from ListView
+            lv_list.getItems().remove(selectedEmployee);
+
+            System.out.println("Employee deleted successfully!");
+        } else {
+            System.out.println("No employee selected!");
+        }
+    }
+
+    public static boolean showDeleteConfirmation(){
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+        a.setTitle("DELETE");
+        a.setHeaderText("Are you sure you want to delete this employee?");
+        a.setContentText("This action cannot be undone.");
+
+        Optional<ButtonType> result = a.showAndWait();
+
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 }
